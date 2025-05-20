@@ -25,7 +25,9 @@ public class CadastroAlunos {
 	                    String matricula = scanner.nextLine();
 	                    System.out.println("Data de Nascimento: ");
 	                    String dataNascimento = scanner.nextLine();
-	                    alunos.add(new Aluno(nome, matricula, dataNascimento));
+	                    System.out.println("Turma: ");
+	                    String turma = scanner.nextLine();
+	                    alunos.add(new Aluno(nome, matricula, dataNascimento, turma));
 	                    System.out.println("Aluno Cadastrado com Sucesso");
 	                    break;
 	                case 2:
