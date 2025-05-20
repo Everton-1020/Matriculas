@@ -17,27 +17,29 @@ public class AlunoDAO {
 	    }
 
 	    public void inserir(Aluno aluno) {
-	        Document doc = new Document("nome", aluno.nome)
-	                .append("matricula", aluno.matricula)
-	                .append("dataNascimento", aluno.dataNascimento);
-	        collection.insertOne(doc);
-	    }
+	    	 Document doc = new Document("nome", aluno.nome)
+	                 .append("matricula", aluno.matricula)
+	                 .append("dataNascimento", aluno.dataNascimento)
+	                 .append("turma", aluno.turma);
+	         collection.insertOne(doc);
+	     }
 
-	    public List<Aluno> listar() {
-	        List<Aluno> lista = new ArrayList<>();
-	        for (Document doc : collection.find()) {
-	            Aluno aluno = new Aluno(
-	                    doc.getString("nome"),
-	                    doc.getString("matricula"),
-	                    doc.getString("dataNascimento"));
-	            lista.add(aluno);
-	        }
-	        return lista;
-	    }
+	     public List<Aluno> listar() {
+	    	 List<Aluno> lista = new ArrayList<>();
+	    	    for (Document doc : collection.find()) {
+	    	        Aluno aluno = new Aluno(
+	    	            doc.getString("nome"),
+	    	            doc.getString("matricula"),
+	    	            doc.getString("dataNascimento"),
+	    	            doc.containsKey("turma") ? doc.getString("turma") : "Turma A"
+	    	        );
+	    	        lista.add(aluno);
+	    	    }
+	    	    return lista;
+	    	}
 
-	    public boolean removerPorMatricula(String matricula) {
-	        return collection.deleteOne(Filters.eq("matricula", matricula)).getDeletedCount() > 0;
-	    }
-	}
-
+	     public boolean removerPorMatricula(String matricula) {
+	         return collection.deleteOne(Filters.eq("matricula", matricula)).getDeletedCount() > 0;
+	     }
+	 }
 
